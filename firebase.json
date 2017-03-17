@@ -1,0 +1,27 @@
+{
+  "hosting": {
+    "public": "work",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/",
+        "headers": [{
+          "key": "Link",
+          "value": "</elements/my-app.js>;rel=preload;as=script,</style.css>;rel=preload;as=style,</elements/list-view.js>;rel=preload;as=script,</data/list.json>;rel=preload"
+        }]
+      },
+      {
+        "source": "/detail/**",
+        "headers": [{
+          "key": "Link",
+          "value": "</elements/my-app.js>;rel=preload;as=script,</style.css>;rel=preload;as=style,</elements/detail-view.js>;rel=preload;as=script"
+        }]
+      }
+    ]
+  }
+}
