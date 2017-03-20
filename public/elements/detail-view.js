@@ -8,37 +8,45 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-class ListViewElement extends HTMLElement {
-  constructor() {
-    super();
+class DetailViewElement extends HTMLElement {
+  static get observedAttributes() {
+    return ['path'];
   }
 
-  connectedCallback() {
+  attributeChangedCallback(attr, oldValue, newValue) {
+    if (attr !== 'path' || !newValue) {
+      return;
+    }
+
+    this.innerHTML = '';
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/data/list.json');
-    xhr.addEventListener('load', () => this._renderItems(JSON.parse(xhr.responseText)));
-    xhr.addEventListener('error', () => this._showNetworkError());
+    xhr.open('GET', `/data${newValue}.json`);
+    xhr.addEventListener('load', () => this.renderItems(JSON.parse(xhr.responseText)));
+    xhr.addEventListener('error', () => this.showNetworkError());
     xhr.send();
 
     // NOTE(keanulee): Fetch doesn't seem to look at H2 pushed resources :(
     // https://bugs.chromium.org/p/chromium/issues/detail?id=702727
     // window.fetch('/data/list.json')
     //   .then(response => response.json())
-    //   .then(json => this._renderItems(json));
+    //   .then(json => this.renderItems(json));
   }
 
-  _renderItems(items) {
-    this.innerHTML = items.reduce((a, item) => a + `
-      <a href="/detail/${item.id}">
-        <img src="${item.imageUrl}">
-        <div>${item.name}</div>
-      </a>`, '');
-  }
-
-  _showNetworkError() {
+  renderItems(item) {
     this.innerHTML = `
+      <img src="${item.imageUrl}">
+      <a href="/" class="close-btn">&times;</a>
+      <div>
+        <h1>${item.name}</h1>
+        <p>${item.description}</p>
+      </div>`;
+  }
+
+  showNetworkError() {
+    this.innerHTML = `
+      <a href="/" class="close-btn">&times;</a>
       <p class="error">No network connection</p>`;
   }
 }
 
-customElements.define('list-view', ListViewElement);
+customElements.define('detail-view', DetailViewElement);

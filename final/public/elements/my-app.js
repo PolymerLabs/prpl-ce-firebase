@@ -9,69 +9,64 @@
  */
 
 class MyAppElement extends HTMLElement {
-  constructor() {
-    super();
-    this._loadedElements = {};
-  }
-
   connectedCallback() {
-    this.addEventListener('click', this._click);
-    window.addEventListener('popstate', this._updateVisiblePage.bind(this));
+    this.addEventListener('click', this.clickHandler);
+    window.addEventListener('popstate', this.updateVisiblePage.bind(this));
 
-    this._listView = this.querySelector('list-view');
-    this._detailView = this.querySelector('detail-view');
-
-    this._updateVisiblePage();
+    this.updateVisiblePage();
   }
 
   /**
    * Display the appropriate view based on the URL.
    */
-  _updateVisiblePage() {
+  updateVisiblePage() {
     if (window.location.pathname.match('^/detail')) {
-      this._loadElement('detail-view');
+      this.loadElement('detail-view');
       document.body.classList.add('detail-view-active');
-      this._detailView.setAttribute('path', window.location.pathname);
+      this.querySelector('detail-view').setAttribute('path', window.location.pathname);
     } else {
-      this._loadElement('list-view');
+      this.loadElement('list-view');
       document.body.classList.remove('detail-view-active');
     }
   }
 
   /**
-   * Loads an element definition if it has not been loaded yet.
+   * A simple click handler for unmodified left-clicks on anchor tags.
    */
-  _loadElement(element) {
-    if (this._loadedElements[element]) {
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = `/elements/${element}.js`;
-    document.head.appendChild(script);
-    this._loadedElements[element] = script;
-  }
-
-  /**
-   * A simple click handler for unmodified left-clicks on anchor tags..
-   */
-  _click(event) {
+  clickHandler(event) {
     if (event.button !== 0 || event.metaKey || event.ctrlKey) {
       return;
     }
 
     let element = event.target;
     while (element !== this) {
-    // for (let i = 0; i < event.path.length; i++) {
-      // const element = event.path[i];
       if (element.tagName === 'A') {
         event.preventDefault();
         window.history.pushState(null, '', element.href);
-        this._updateVisiblePage();
+        this.updateVisiblePage();
         return;
       }
       element = element.parentNode;
     }
+  }
+
+  constructor() {
+    super();
+    this.loadedElements = {};
+  }
+
+  /**
+   * Loads an element definition if it has not been loaded yet.
+   */
+  loadElement(element) {
+    if (this.loadedElements[element]) {
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = `/elements/${element}.js`;
+    document.head.appendChild(script);
+    this.loadedElements[element] = script;
   }
 }
 

@@ -13,10 +13,6 @@ class DetailViewElement extends HTMLElement {
     return ['path'];
   }
 
-  constructor() {
-    super();
-  }
-
   attributeChangedCallback(attr, oldValue, newValue) {
     if (attr !== 'path' || !newValue) {
       return;
@@ -25,18 +21,18 @@ class DetailViewElement extends HTMLElement {
     this.innerHTML = '';
     var xhr = new XMLHttpRequest();
     xhr.open('GET', `/data${newValue}.json`);
-    xhr.addEventListener('load', () => this._renderItems(JSON.parse(xhr.responseText)));
-    xhr.addEventListener('error', () => this._showNetworkError());
+    xhr.addEventListener('load', () => this.renderItems(JSON.parse(xhr.responseText)));
+    xhr.addEventListener('error', () => this.showNetworkError());
     xhr.send();
 
     // NOTE(keanulee): Fetch doesn't seem to look at H2 pushed resources :(
     // https://bugs.chromium.org/p/chromium/issues/detail?id=702727
     // window.fetch('/data/list.json')
     //   .then(response => response.json())
-    //   .then(json => this._renderItems(json));
+    //   .then(json => this.renderItems(json));
   }
 
-  _renderItems(item) {
+  renderItems(item) {
     this.innerHTML = `
       <img src="${item.imageUrl}">
       <a href="/" class="close-btn">&times;</a>
@@ -46,7 +42,7 @@ class DetailViewElement extends HTMLElement {
       </div>`;
   }
 
-  _showNetworkError() {
+  showNetworkError() {
     this.innerHTML = `
       <a href="/" class="close-btn">&times;</a>
       <p class="error">No network connection</p>`;

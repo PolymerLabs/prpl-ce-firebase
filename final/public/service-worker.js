@@ -11,6 +11,12 @@
 importScripts('/sw-lib.min.js');
 
 /**
+ * Activate this service worker on all active clients without reloading the page.
+ */
+self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
+self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
+
+/**
  * Precache all static assets. Note that revision will need to be updated here
  * to bust the service worker cache.
  */
@@ -84,9 +90,3 @@ const corsCacheFirst = goog.swlib.cacheFirst({
   }
 });
 goog.swlib.router.registerRoute(assetsRegex, corsCacheFirst);
-
-/**
- * Activate this service worker on all active clients without reloading the page.
- */
-self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
-self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
