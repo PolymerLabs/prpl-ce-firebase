@@ -1,14 +1,12 @@
 {
-  "short_name": "Cookbook",
-  "name": "Cookbook",
+  "short_name": "menu",
+  "name": "menu",
   "display": "standalone",
+  "background_color": "#EEE",
+  "theme_color": "#673AB7",
   "icons": [{
-    "src": "https://app-layout-assets.appspot.com/assets/pesto/icon-144.png",
-    "sizes": "144x144",
-    "type": "image/png"
-  }, {
-    "src": "https://app-layout-assets.appspot.com/assets/pesto/icon-256.png",
-    "sizes": "256x256",
+    "src": "https://app-layout-assets.appspot.com/assets/menu/icon-192.png",
+    "sizes": "192x192",
     "type": "image/png"
   }],
   "start_url": "/"

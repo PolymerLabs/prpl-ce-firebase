@@ -2,56 +2,36 @@
   {
     "id": "1",
     "name": "Chicken tostadas",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/image5.png"
+    "imageUrl": "https://app-layout-assets.appspot.com/assets/menu/1.jpg"
   },
   {
     "id": "2",
-    "name": "Fresh Fettuccine",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/pasta.png"
+    "name": "Garlic bok choy",
+    "imageUrl": "https://app-layout-assets.appspot.com/assets/menu/2.jpg"
   },
   {
     "id": "3",
     "name": "Sicilian-Style sardines",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/IMG_0575.jpg"
+    "imageUrl": "https://app-layout-assets.appspot.com/assets/menu/3.jpg"
   },
   {
     "id": "4",
-    "name": "Garlic bok choy",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/bok-choy.jpg"
+    "name": "Rustic purple mash",
+    "imageUrl": "https://app-layout-assets.appspot.com/assets/menu/4.jpg"
   },
   {
     "id": "5",
     "name": "Seared sesame fish",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/fish-steaks.jpg"
+    "imageUrl": "https://app-layout-assets.appspot.com/assets/menu/5.jpg"
   },
   {
     "id": "6",
-    "name": "Pesto Bruchetta",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/image2-01.png"
+    "name": "Oven Sausage",
+    "imageUrl": "https://app-layout-assets.appspot.com/assets/menu/6.jpg"
   },
   {
     "id": "7",
     "name": "Coconut rice",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/white-rice.jpg"
-  },
-  {
-    "id": "8",
-    "name": "Bacon Sprouts",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/image1-01.png"
-  },
-  {
-    "id": "9",
-    "name": "Oven Sausage",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/sausage.jpg"
-  },
-  {
-    "id": "10",
-    "name": "Herb artichoke",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/IMG_5438.png"
-  },
-  {
-    "id": "11",
-    "name": "Rustic purple mash",
-    "imageUrl": "https://app-layout-assets.appspot.com/assets/pesto/food/blue-potato.jpg"
+    "imageUrl": "https://app-layout-assets.appspot.com/assets/menu/7.jpg"
   }
 ]

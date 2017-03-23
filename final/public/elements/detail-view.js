@@ -34,7 +34,7 @@ class DetailViewElement extends HTMLElement {
 
   renderItems(item) {
     this.innerHTML = `
-      <img src="${item.imageUrl}">
+      <img src="${item.imageUrl}" alt="${item.name}">
       <a href="/" class="close-btn">&times;</a>
       <div>
         <h1>${item.name}</h1>

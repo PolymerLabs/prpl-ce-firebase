@@ -26,7 +26,7 @@ class ListViewElement extends HTMLElement {
   renderItems(items) {
     this.innerHTML = items.reduce((a, item) => a + `
       <a href="/detail/${item.id}">
-        <img src="${item.imageUrl}">
+        <img src="${item.imageUrl}" alt="${item.name}">
         <div>${item.name}</div>
       </a>`, '');
   }
