@@ -81,7 +81,7 @@ goog.swlib.warmRuntimeCache([
  * you would need to revision the image (e.g. by changing the filename).
  *
  * Cross-origin requests will always return a status of 0 - this needs to be
- * explicity specified as cacheable when creating the handler.
+ * explicitly specified as cacheable when creating the handler.
  */
 const assetsRegex = new RegExp('^https://app-layout-assets\.appspot\.com/');
 const corsCacheFirst = goog.swlib.cacheFirst({
