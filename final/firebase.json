@@ -3,7 +3,7 @@
     "public": "public",
     "rewrites": [
       {
-        "source": "**",
+        "source": "/detail/*",
         "destination": "/index.html"
       }
     ],
@@ -16,7 +16,7 @@
         }]
       },
       {
-        "source": "/detail/**",
+        "source": "/detail/*",
         "headers": [{
           "key": "Link",
           "value": "</elements/my-app.js>;rel=preload;as=script,</style.css>;rel=preload;as=style,</elements/detail-view.js>;rel=preload;as=script"

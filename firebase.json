@@ -3,7 +3,7 @@
     "public": "public",
     "rewrites": [
       {
-        "source": "**",
+        "source": "/detail/*",
         "destination": "/index.html"
       }
     ]
