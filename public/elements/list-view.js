@@ -15,12 +15,6 @@ class ListViewElement extends HTMLElement {
     xhr.addEventListener('load', () => this.renderItems(JSON.parse(xhr.responseText)));
     xhr.addEventListener('error', () => this.showNetworkError());
     xhr.send();
-
-    // NOTE(keanulee): Fetch doesn't seem to look at H2 pushed resources :(
-    // https://bugs.chromium.org/p/chromium/issues/detail?id=702727
-    // window.fetch('/data/list.json')
-    //   .then(response => response.json())
-    //   .then(json => this.renderItems(json));
   }
 
   renderItems(items) {

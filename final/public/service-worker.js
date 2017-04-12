@@ -22,28 +22,28 @@ self.addEventListener('activate', event => event.waitUntil(self.clients.claim())
  */
 goog.swlib.cacheRevisionedAssets([
   {
-    url: '/',
-    revision: '1'
-  },
-  {
     url: '/elements/my-app.js',
-    revision: '1'
-  },
-  {
-    url: '/style.css',
-    revision: '1'
+    revision: 'f6cfd5c1c19c16266636a57a4704c09e'
   },
   {
     url: '/elements/list-view.js',
-    revision: '1'
+    revision: 'c67ff3c519e7026524e99fa46e72ee65'
   },
   {
     url: '/elements/detail-view.js',
-    revision: '1'
+    revision: '74cb8d634cfab3dc639dbc6172dc45fe'
+  },
+  {
+    url: '/style.css',
+    revision: '136144651ad43b738bee8feeaef6dd93'
   },
   {
     url: '/manifest.json',
-    revision: '1'
+    revision: 'fc9108e8da8e47ef91277ada694f3a03'
+  },
+  {
+    url: '/',
+    revision: '2a6102028bf7c9774318544307073dd7'
   }
 ]);
 
@@ -63,7 +63,7 @@ goog.swlib.router.registerRoute('/detail/*',
  * up-to-date data if they have a reliable network connection, but falls back to
  * cached content otherwise.
  */
-goog.swlib.router.registerRoute('/data/*', goog.swlib.networkFirst());
+goog.swlib.router.registerRoute('/data/*', goog.swlib.strategies.networkFirst());
 
 /**
  * The initial request to "/data/list.json" is made before this service worker is
@@ -84,7 +84,7 @@ goog.swlib.warmRuntimeCache([
  * explicitly specified as cacheable when creating the handler.
  */
 const assetsRegex = new RegExp('^https://app-layout-assets\.appspot\.com/');
-const corsCacheFirst = goog.swlib.cacheFirst({
+const corsCacheFirst = goog.swlib.strategies.cacheFirst({
   cacheableResponse: {
     statuses: [0]
   }
