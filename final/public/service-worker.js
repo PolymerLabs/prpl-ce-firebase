@@ -9,6 +9,7 @@
  */
 
 importScripts('/sw-lib.min.js');
+const swlib = new goog.SWLib();
 
 /**
  * Activate this service worker on all active clients without reloading the page.
@@ -20,7 +21,7 @@ self.addEventListener('activate', event => event.waitUntil(self.clients.claim())
  * Precache all static assets. Note that revision will need to be updated here
  * to bust the service worker cache.
  */
-goog.swlib.cacheRevisionedAssets([
+swlib.precache([
   {
     url: '/elements/my-app.js',
     revision: 'f6cfd5c1c19c16266636a57a4704c09e'
@@ -52,7 +53,7 @@ goog.swlib.cacheRevisionedAssets([
  * Construct a new Response object with no link headers so that the browser
  * doesn't try to preload list view assets.
  */
-goog.swlib.router.registerRoute('/detail/*',
+swlib.router.registerRoute('/detail/*',
   () => caches.match('/')
     .then(response => response.blob())
     .then(blob => new Response(blob))
@@ -63,17 +64,7 @@ goog.swlib.router.registerRoute('/detail/*',
  * up-to-date data if they have a reliable network connection, but falls back to
  * cached content otherwise.
  */
-goog.swlib.router.registerRoute('/data/*', goog.swlib.strategies.networkFirst());
-
-/**
- * The initial request to "/data/list.json" is made before this service worker is
- * activated, so it won't be cached on the first page load. To make sure the
- * list page is available if the user becomes offline before the next page load,
- * warm the runtime cache with "/data/list.json" now.
- */
-goog.swlib.warmRuntimeCache([
-  '/data/list.json'
-]);
+swlib.router.registerRoute('/data/*', swlib.strategies.networkFirst());
 
 /**
  * Use the "cache-first" strategy for images. This means that once an image is
@@ -84,9 +75,9 @@ goog.swlib.warmRuntimeCache([
  * explicitly specified as cacheable when creating the handler.
  */
 const assetsRegex = new RegExp('^https://app-layout-assets\.appspot\.com/');
-const corsCacheFirst = goog.swlib.strategies.cacheFirst({
+const corsCacheFirst = swlib.strategies.cacheFirst({
   cacheableResponse: {
     statuses: [0]
   }
 });
-goog.swlib.router.registerRoute(assetsRegex, corsCacheFirst);
+swlib.router.registerRoute(assetsRegex, corsCacheFirst);
