@@ -4,10 +4,17 @@
   "display": "standalone",
   "background_color": "#EEE",
   "theme_color": "#673AB7",
-  "icons": [{
-    "src": "https://app-layout-assets.appspot.com/assets/menu/icon-192.png",
-    "sizes": "192x192",
-    "type": "image/png"
-  }],
+  "icons": [
+    {
+      "src": "https://prpl-ce-firebase.firebaseapp.com/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "https://prpl-ce-firebase.firebaseapp.com/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
   "start_url": "/"
 }

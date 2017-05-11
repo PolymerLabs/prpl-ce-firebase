@@ -74,10 +74,10 @@ swlib.router.registerRoute('/data/*', swlib.strategies.networkFirst());
  * Cross-origin requests will always return a status of 0 - this needs to be
  * explicitly specified as cacheable when creating the handler.
  */
-const assetsRegex = new RegExp('^https://app-layout-assets\.appspot\.com/');
+const assetsRegex = new RegExp('^https://prpl-ce-firebase\.firebaseapp\.com/images/');
 const corsCacheFirst = swlib.strategies.cacheFirst({
   cacheableResponse: {
-    statuses: [0]
+    statuses: [0, 200]
   }
 });
 swlib.router.registerRoute(assetsRegex, corsCacheFirst);
