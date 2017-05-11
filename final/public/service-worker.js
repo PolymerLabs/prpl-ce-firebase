@@ -8,7 +8,7 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-importScripts('/sw-lib.min.js');
+importScripts('/sw-lib.prod.v0.0.25.js');
 const swlib = new goog.SWLib();
 
 /**
