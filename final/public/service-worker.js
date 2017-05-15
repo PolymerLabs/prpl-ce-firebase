@@ -8,8 +8,8 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-importScripts('/sw-lib.prod.v0.0.25.js');
-const swlib = new goog.SWLib();
+importScripts('/workbox-sw.prod.v0.0.2.js');
+const workboxSW = new WorkboxSW();
 
 /**
  * Activate this service worker on all active clients without reloading the page.
@@ -21,7 +21,7 @@ self.addEventListener('activate', event => event.waitUntil(self.clients.claim())
  * Precache all static assets. Note that revision will need to be updated here
  * to bust the service worker cache.
  */
-swlib.precache([
+workboxSW.precache([
   {
     url: '/elements/my-app.js',
     revision: 'f6cfd5c1c19c16266636a57a4704c09e'
@@ -53,18 +53,16 @@ swlib.precache([
  * Construct a new Response object with no link headers so that the browser
  * doesn't try to preload list view assets.
  */
-swlib.router.registerRoute('/detail/*',
-  () => caches.match('/')
-    .then(response => response.blob())
-    .then(blob => new Response(blob))
-);
+const detailViewHandler = () => caches.match('/')
+  .then(response => new Response(response.body));
+workboxSW.router.registerRoute('/detail/*', detailViewHandler);
 
 /**
  * Use the "network-first" strategy for data. This means users will always get
  * up-to-date data if they have a reliable network connection, but falls back to
  * cached content otherwise.
  */
-swlib.router.registerRoute('/data/*', swlib.strategies.networkFirst());
+workboxSW.router.registerRoute('/data/*', workboxSW.strategies.networkFirst());
 
 /**
  * Use the "cache-first" strategy for images. This means that once an image is
@@ -75,9 +73,9 @@ swlib.router.registerRoute('/data/*', swlib.strategies.networkFirst());
  * explicitly specified as cacheable when creating the handler.
  */
 const assetsRegex = new RegExp('^https://prpl-ce-firebase\.firebaseapp\.com/images/');
-const corsCacheFirst = swlib.strategies.cacheFirst({
+const corsCacheFirst = workboxSW.strategies.cacheFirst({
   cacheableResponse: {
     statuses: [0, 200]
   }
 });
-swlib.router.registerRoute(assetsRegex, corsCacheFirst);
+workboxSW.router.registerRoute(assetsRegex, corsCacheFirst);
