@@ -8,7 +8,7 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-importScripts('/workbox-sw.prod.v0.0.2.js');
+importScripts('/workbox-sw.prod.v1.0.1.js');
 const workboxSW = new WorkboxSW();
 
 /**
