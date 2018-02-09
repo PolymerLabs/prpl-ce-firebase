@@ -33,7 +33,7 @@ module.exports = {
      * cached content otherwise.
      */
     {
-      "urlPattern": "/data/*",
+      "urlPattern": /\/data\/.*/,
       "handler": "networkFirst"
     },
 

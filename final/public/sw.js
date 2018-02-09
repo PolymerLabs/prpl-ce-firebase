@@ -1,4 +1,4 @@
-importScripts('workbox-sw.prod.v1.1.0.js');
+importScripts('workbox-sw.prod.v2.1.2.js');
 
 /**
  * DO NOT EDIT THE FILE MANIFEST ENTRY
@@ -49,7 +49,7 @@ const workboxSW = new self.WorkboxSW({
   "clientsClaim": true
 });
 workboxSW.precache(fileManifest);
-workboxSW.router.registerNavigationRoute("index.html");workboxSW.router.registerRoute('/data/*', workboxSW.strategies.networkFirst({}), 'GET');
+workboxSW.router.registerNavigationRoute("index.html");workboxSW.router.registerRoute(/\/data\/.*/, workboxSW.strategies.networkFirst({}), 'GET');
 workboxSW.router.registerRoute(/^https:\/\/prpl-ce-firebase\.firebaseapp\.com\/images\//, workboxSW.strategies.cacheFirst({
   "cacheableResponse": {
     "statuses": [
