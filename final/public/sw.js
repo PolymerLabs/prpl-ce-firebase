@@ -1,23 +1,27 @@
-importScripts('workbox-sw.prod.v2.1.2.js');
+/**
+ * Welcome to your Workbox-powered service worker!
+ *
+ * You'll need to register this file in your web app and you should
+ * disable HTTP caching for this file too.
+ * See https://goo.gl/nhQhGp
+ *
+ * The rest of the code is auto-generated. Please don't update this file
+ * directly; instead, make changes to your Workbox build configuration
+ * and re-run your build process.
+ * See https://goo.gl/2aRDsh
+ */
+
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.0.1/workbox-sw.js");
+
+workbox.skipWaiting();
+workbox.clientsClaim();
 
 /**
- * DO NOT EDIT THE FILE MANIFEST ENTRY
- *
- * The method precache() does the following:
- * 1. Cache URLs in the manifest to a local cache.
- * 2. When a network request is made for any of these URLs the response
- *    will ALWAYS comes from the cache, NEVER the network.
- * 3. When the service worker changes ONLY assets with a revision change are
- *    updated, old cache entries are left as is.
- *
- * By changing the file manifest manually, your users may end up not receiving
- * new versions of files because the revision hasn't changed.
- *
- * Please use workbox-build or some other tool / approach to generate the file
- * manifest which accounts for changes to local files and update the revision
- * accordingly.
+ * The workboxSW.precacheAndRoute() method efficiently caches and responds to
+ * requests for URLs in the manifest.
+ * See https://goo.gl/S9QRab
  */
-const fileManifest = [
+self.__precacheManifest = [
   {
     "url": "elements/detail-view.js",
     "revision": "74cb8d634cfab3dc639dbc6172dc45fe"
@@ -42,19 +46,11 @@ const fileManifest = [
     "url": "style.css",
     "revision": "136144651ad43b738bee8feeaef6dd93"
   }
-];
+].concat(self.__precacheManifest || []);
+workbox.precaching.suppressWarnings();
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-const workboxSW = new self.WorkboxSW({
-  "skipWaiting": true,
-  "clientsClaim": true
-});
-workboxSW.precache(fileManifest);
-workboxSW.router.registerNavigationRoute("index.html");workboxSW.router.registerRoute(/\/data\/.*/, workboxSW.strategies.networkFirst({}), 'GET');
-workboxSW.router.registerRoute(/^https:\/\/prpl-ce-firebase\.firebaseapp\.com\/images\//, workboxSW.strategies.cacheFirst({
-  "cacheableResponse": {
-    "statuses": [
-      0,
-      200
-    ]
-  }
-}), 'GET');
+workbox.routing.registerNavigationRoute("index.html");
+
+workbox.routing.registerRoute(/\/data\/.*/, workbox.strategies.networkFirst(), 'GET');
+workbox.routing.registerRoute(/^https:\/\/prpl-ce-firebase\.firebaseapp\.com\/images\//, workbox.strategies.cacheFirst({ plugins: [new workbox.cacheableResponse.Plugin({"statuses":[0,200]})] }), 'GET');

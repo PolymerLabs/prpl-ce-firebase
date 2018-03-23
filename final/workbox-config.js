@@ -4,9 +4,6 @@ module.exports = {
     "**/*.{js,ico,html,css}"
   ],
   "swDest": "public/sw.js",
-  "globIgnores": [
-    "../workbox-cli-config.js"
-  ],
 
   /**
    * Added config options below. Don't forget the trailing comma (,) above.
